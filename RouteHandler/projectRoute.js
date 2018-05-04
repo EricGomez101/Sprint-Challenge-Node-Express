@@ -8,6 +8,9 @@ router.get('/', (req, res) => {
   .then(projects => {
     res.json(projects);
   })
+  .catch(err => {
+    res.status(500).json({error: err});
+  })
 })
 
 router.get('/:id', (req, res) => {
@@ -15,6 +18,9 @@ router.get('/:id', (req, res) => {
   projectModel.get(id)
   .then(project => {
     res.json(project);
+  })
+  .catch(err => {
+    res.status(500).json({error: err});
   })
 })
 
@@ -26,6 +32,9 @@ router.post('/', (req, res) => {
     .then(project => {
       res.status(201).json(project);
     })
+    .catch(err => {
+      res.status(500).json({error: err});
+    })
   })
 })
 router.put('/:id', (req, res) => {
@@ -34,6 +43,9 @@ router.put('/:id', (req, res) => {
   projectModel.update(id, update)
   .then(response => {
     res.json(response);
+  })
+  .catch(err => {
+    res.status(500).json({error: err});
   })
 })
 router.delete('/:id', (req, res) => {
@@ -45,6 +57,9 @@ router.delete('/:id', (req, res) => {
       if (response) {
         res.json(project);
       }
+    })
+    .catch(err => {
+      res.status(404).json({error: err});
     })
   })
 })
